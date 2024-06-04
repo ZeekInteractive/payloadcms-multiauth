@@ -182,7 +182,7 @@ export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOp
           ],
           afterRead: [
             ({value}) => {
-              return JSON.parse(value)
+              return new Uint8Array(JSON.parse(value).buffer)
             }
           ],
         }

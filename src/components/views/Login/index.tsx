@@ -96,7 +96,7 @@ const Login: React.FC = () => {
     })
 
     const respJson = await resp.json()
-
+    console.log(respJson)
     let asseResp
     try {
       // Pass the options to the authenticator and wait for a response
@@ -115,7 +115,7 @@ const Login: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(asseResp),
+      body: JSON.stringify({ email, asseResp }),
     })
     console.log(verificationResp)
 

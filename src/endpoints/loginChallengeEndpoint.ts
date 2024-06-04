@@ -21,18 +21,16 @@ const loginChallengeEndpoint: Endpoint = {
         id: passkey.credentialID,
         type: 'public-key',
         transports: ['usb', 'nfc', 'ble', 'internal'],
-        challenge: passkey.challenge,
       })),
       userVerification: 'preferred',
     })
 
-    console.log(options)
-
     await req.payload.update({
       collection: pluginConfig.authCollectionSlug,
       id: user.id,
-      data: { options } as any,
+      data: { registrationOptions: options } as any,
     })
+
     res.json(options)
 
     return res
