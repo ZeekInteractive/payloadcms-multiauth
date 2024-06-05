@@ -17,6 +17,7 @@ import { loginResponseEndpoint,
   registerChallengeEndpoint,
   registerResponseEndpoint,
 } from './endpoints/Endpoints'
+import MFAKey from "./components/fields/afterInput/MFAKey";
 
 export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOptions) => async (incomingConfig) => {
   let config: Config = {...incomingConfig}
@@ -120,6 +121,9 @@ export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOp
         required: true,
         admin: {
           readOnly: true,
+          components: {
+            afterInput: [MFAKey]
+          }
         },
         defaultValue: () => generateSecret(20),
       },
