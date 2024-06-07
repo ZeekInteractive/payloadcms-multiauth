@@ -118,23 +118,18 @@ export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOp
         label: 'MFA Key',
         name: 'mfa_key',
         type: 'text',
-        required: true,
+        defaultValue: () => generateSecret(20),
         admin: {
           readOnly: true,
           components: {
             afterInput: [MFAKey]
           }
         },
-        defaultValue: () => generateSecret(20),
       },
       {
         label: 'MFA Google Key',
         name: 'google_mfa_key',
         type: 'text',
-        admin: {
-          hidden: true,
-          readOnly: true,
-        },
         hooks: {
           beforeChange: [
             (data) => {
@@ -143,6 +138,7 @@ export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOp
           ],
         },
         admin: {
+          hidden: true,
           readOnly: true,
           description:
             'Enter this key into Google Authenticator. Save to see updated value.',
