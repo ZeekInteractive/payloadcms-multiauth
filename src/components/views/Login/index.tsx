@@ -1,9 +1,10 @@
 // src/components/Login.tsx
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { AdminViewComponent } from 'payload/config'
 import './index.scss'
 
-const Login: React.FC = () => {
+const Login: AdminViewComponent = () => {
   const [cookies, setCookie] = useCookies(['payload-token'])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +22,7 @@ const Login: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({email}),
+        body: JSON.stringify({ email }),
       })
 
       if (response.ok) {
@@ -42,7 +43,7 @@ const Login: React.FC = () => {
     setError(null)
     console.log(email, password, twoFaToken, authMethod)
 
-    let body: any = {email, password}
+    const body: any = { email, password }
     if (authMethod === 'password_2fa') {
       body.token = twoFaToken
     }
@@ -53,18 +54,23 @@ const Login: React.FC = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    }).catch(reqError => {
-      setError(reqError.message || 'Login failed')
     })
+      .then(resp => {
+        return resp
+      })
+      .catch(reqError => {
+        setError(reqError.message || 'Login failed')
+        return reqError
+      })
 
-    const json = await response.json()
+    const respJson = await response.json()
 
     // if response is 200 continue
-    if (response.ok) {
-      setCookie('payload-token', json.data.token, {path: '/'})
+    if (respJson) {
+      setCookie('payload-token', respJson.data.token, { path: '/' })
       window.location.href = '/admin'
     } else {
-      setError(json.message || 'Login failed')
+      setError(respJson.message || 'Login failed')
     }
   }
 
@@ -87,7 +93,7 @@ const Login: React.FC = () => {
     elemSuccess.innerHTML = ''
     elemError.innerHTML = ''
 
-    const resp = await fetch('/multi-auth/auth/challenge', {
+    const resp: Response = await fetch('/multi-auth/auth/challenge', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

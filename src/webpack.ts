@@ -4,6 +4,7 @@ import type { Configuration as WebpackConfig } from 'webpack'
 
 export const extendWebpackConfig =
   (config: Config): ((webpackConfig: WebpackConfig) => WebpackConfig) =>
+  // @ts-expect-error
   webpackConfig => {
     const existingWebpackConfig =
       typeof config.admin?.webpack === 'function'

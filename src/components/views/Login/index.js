@@ -111,7 +111,7 @@ var Login = function () {
         });
     }); };
     var handleLoginSubmit = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-        var body, response, json;
+        var body, response, respJson;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -128,8 +128,13 @@ var Login = function () {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify(body),
-                        }).catch(function (reqError) {
+                        })
+                            .then(function (resp) {
+                            return resp;
+                        })
+                            .catch(function (reqError) {
                             setError(reqError.message || 'Login failed');
+                            return reqError;
                         })];
                 case 1:
                     response = _a.sent();
@@ -137,14 +142,14 @@ var Login = function () {
                         // if response is 200 continue
                     ];
                 case 2:
-                    json = _a.sent();
+                    respJson = _a.sent();
                     // if response is 200 continue
-                    if (response.ok) {
-                        setCookie('payload-token', json.data.token, { path: '/' });
+                    if (respJson) {
+                        setCookie('payload-token', respJson.data.token, { path: '/' });
                         window.location.href = '/admin';
                     }
                     else {
-                        setError(json.message || 'Login failed');
+                        setError(respJson.message || 'Login failed');
                     }
                     return [2 /*return*/];
             }

@@ -1,4 +1,5 @@
 interface Passkey {
+
   // SQL: Store as `TEXT`. Index this column
   credentialID: string
   // SQL: Store raw bytes as `BYTEA`/`BLOB`/etc...

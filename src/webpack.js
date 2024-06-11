@@ -17,6 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.extendWebpackConfig = void 0;
 var path_1 = __importDefault(require("path"));
 var extendWebpackConfig = function (config) {
+    // @ts-expect-error
     return function (webpackConfig) {
         var _a;
         var _b, _c;

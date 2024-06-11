@@ -89,6 +89,7 @@ var registerResponseEndpoint = {
                     };
                     return [4 /*yield*/, req.payload.create({
                             collection: 'authenticators',
+                            // @ts-expect-error
                             data: newPasskey,
                         })];
                 case 6:

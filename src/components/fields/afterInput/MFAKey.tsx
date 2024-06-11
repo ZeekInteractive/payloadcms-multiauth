@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 
-const MFAKey: React.FC = () => {
+const MFAKey = () => {
   const [showQRCode, setShowQRCode] = useState(false)
 
   const email = (document.getElementById('field-email') as HTMLInputElement)?.value
@@ -12,7 +12,7 @@ const MFAKey: React.FC = () => {
     return null
   }
 
-  const toggleQRCode = (e) => {
+  const toggleQRCode = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     setShowQRCode(prevShowQRCode => !prevShowQRCode)
   }

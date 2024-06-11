@@ -25,7 +25,7 @@ const registerResponseEndpoint: Endpoint = {
         expectedOrigin: 'http://localhost:3000',
         expectedRPID: 'localhost',
       })
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error(error)
       return res.status(400).send({ error: error.message })
     }
@@ -49,6 +49,7 @@ const registerResponseEndpoint: Endpoint = {
     // Save the new passkey to the database
     const payload = await req.payload.create({
       collection: 'authenticators',
+      // @ts-expect-error
       data: newPasskey,
     })
 

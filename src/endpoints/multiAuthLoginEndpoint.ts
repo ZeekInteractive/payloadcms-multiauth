@@ -31,7 +31,7 @@ const multiAuthLoginEndpoint: Endpoint = {
     let result
     try {
       result = await req.payload.login(loginData)
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.log(error.message)
       return res.status(401).json({ message: error.message })
     }

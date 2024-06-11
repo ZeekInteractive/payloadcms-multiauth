@@ -2,7 +2,6 @@ import { extendWebpackConfig } from './webpack'
 import type { PluginTypes } from './types'
 import type {Config, Endpoint, Plugin} from 'payload/config'
 import {CollectionBeforeLoginHook, CollectionConfig } from 'payload/dist/exports/types'
-import BeforeLogin from "./components/BeforeLogin"
 import base32 from 'hi-base32'
 import Login from "./components/views/Login";
 import {
@@ -50,7 +49,6 @@ export const payloadWebAuthn: (pluginOptions: PluginTypes) => Plugin = (pluginOp
     ...(config.admin || {}),
     components: {
       ...(config.admin?.components || {}),
-      beforeLogin: [BeforeLogin],
       views: {
         ...(config.admin?.components?.views || {}),
         CustomLogin: {

@@ -61,7 +61,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.payloadWebAuthn = void 0;
 var webpack_1 = require("./webpack");
-var BeforeLogin_1 = __importDefault(require("./components/BeforeLogin"));
 var hi_base32_1 = __importDefault(require("hi-base32"));
 var Login_1 = __importDefault(require("./components/views/Login"));
 var totp_1 = require("@sunknudsen/totp");
@@ -95,7 +94,7 @@ var payloadWebAuthn = function (pluginOptions) { return function (incomingConfig
                 });
             });
         };
-        config.admin = __assign(__assign({}, (config.admin || {})), { components: __assign(__assign({}, (((_a = config.admin) === null || _a === void 0 ? void 0 : _a.components) || {})), { beforeLogin: [BeforeLogin_1.default], views: __assign(__assign({}, (((_c = (_b = config.admin) === null || _b === void 0 ? void 0 : _b.components) === null || _c === void 0 ? void 0 : _c.views) || {})), { CustomLogin: {
+        config.admin = __assign(__assign({}, (config.admin || {})), { components: __assign(__assign({}, (((_a = config.admin) === null || _a === void 0 ? void 0 : _a.components) || {})), { views: __assign(__assign({}, (((_c = (_b = config.admin) === null || _b === void 0 ? void 0 : _b.components) === null || _c === void 0 ? void 0 : _c.views) || {})), { CustomLogin: {
                         path: '/login-2fa',
                         Component: Login_1.default,
                     } }) }), user: pluginConfig_1.default.authCollectionSlug });
