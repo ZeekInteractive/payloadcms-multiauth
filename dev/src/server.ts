@@ -10,8 +10,8 @@ app.get('/', (_, res) => {
   res.redirect('/admin')
 })
 
-app.get('/admin/login', (_, res) => {
-  res.redirect('/admin/login-2fa')
+app.get('/admin/login*', (_, res) => {
+  res.redirect('/admin/2fa-login')
 })
 
 // parse application/json
